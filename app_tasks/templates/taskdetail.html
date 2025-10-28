@@ -1,0 +1,23 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<div class="col-6 offset-3">
+    <form action="" method="post">
+        {% csrf_token %}
+        {% for f in form %}
+        <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+        <div class="form-error">{{ f.errors }}</div>
+        {% endfor %}
+        <button type="submit" class="btn btn-secondary">Сохранить</button>
+    </form>
+</div>
+
+<script>
+  window.djangoData = {
+    listOfDictsPriority: {{ list_of_dicts_priority|safe }},
+    listOfDictsTypeTask: {{ list_of_dicts_type_task|safe }},
+  };
+</script>
+{% endblock content %}

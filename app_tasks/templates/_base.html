@@ -1,0 +1,36 @@
+<!doctype html>
+{% load static %}
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Helpdesk</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+  <body>
+
+  {% if user.is_authenticated %}
+  {% block mainmenu %}
+
+		<div class="header">
+			<ul id="mainmenu" class="mainmenu">
+                <li class="first"><h2>Helpdesk</h2></li>
+                <li class="first"><a href="{% url 'app_tasks:index' %}"><button class="btn btn-outline-success" type="submit">Заявки</button></a></li>
+                <li class="first"><a href="{% url 'app_tasks:taskdetails' %}"><button class="btn btn-outline-success" type="submit">Создать заявку</button></a></li>
+                {% if user.is_superuser or user.access_level == 2 %}
+                <li class="first"><a href="{% url 'app_users:listusers' %}"><button class="btn btn-outline-success" type="submit">Пользователи</button></a></li>
+                {% endif %}
+                <li class="last"> {{user.username}} | <a href="{% url 'app_users:logout' %}"><button class="btn btn-outline-success" type="submit">Выйти</button></a></li>
+            </ul>
+        </div>
+
+  {% endblock mainmenu %}
+  {% endif %}
+
+  {% block content %}
+
+  {% endblock content %}
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% csrf_token %}
+    <div class="user-table-container">
+        <table class="table_users">
+            <thead>
+                <tr>
+                    <th>Департамент</th>
+                    <th>Пользователь</th>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Уровень доступа</th>
+                 </tr>
+            </thead>
+            <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>
+                            {{ user.department }}
+                        </td>
+                        <td>
+                             <form method="POST" action="{% url 'app_users:userprofile' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="user_id" value="{{user.id}}" />
+                                <button type="submit" style="border:none; background:none; padding:0; margin:0; cursor:pointer; color:blue; text-decoration:underline;">
+                                  {{user.username}}
+                                </button>
+                              </form>
+                        </td>
+                        <td>
+                            {{ user.first_name }}
+                        </td>
+                        <td>
+                            {{ user.last_name }}
+                        </td>
+                        <td>
+                            {{ user.access_level }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+	        </tbody>
+        </table>
+    </div>
+
+{% endblock %}

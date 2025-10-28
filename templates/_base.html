@@ -1,0 +1,12 @@
+{% extends 'django_bootstrap5/bootstrap5.html' %}
+
+{% load django_bootstrap5 %}
+
+{% block bootstrap5_title %}{% block title %}{% endblock %}{% endblock %}
+
+{% block bootstrap5_content %}
+    <div class="container">
+        {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+        {% block body %}{% endblock %}
+    </div>
+{% endblock %}

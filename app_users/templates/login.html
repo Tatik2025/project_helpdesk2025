@@ -1,0 +1,16 @@
+{% extends '_base.html' %}
+{% block content %}
+<div class="col-4 offset-3">
+    <h2>Авторизация</h2>
+    <form action="" method="post" autocomplete="off">
+        {% csrf_token %}
+        {% for f in form %}
+            <p><label class="form-label"> {{ f.label }}</label>{{ f }}</p>
+            <div class="form-error">{{ f.errors }}</div>
+        {% endfor %}
+        <br>
+        <button type="submit" class="btn btn-secondary">Войти</button>
+        <button type="submit" class="btn btn-secondary"> <a href="{% url 'app_users:register' %}"class="text-decoration-none text-reset">Зарегистрироваться</a></button>
+    </form>
+</div>
+{% endblock content %}

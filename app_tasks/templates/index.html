@@ -1,0 +1,60 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% csrf_token %}
+    <div class="user-table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Номер заявки</th>
+                    <th>Тема</th>
+                    <th>Автор</th>
+                    <th>Срок</th>
+                    <th>Статус</th>
+                    <th>Дата создания заявки</th>
+                    <th>Приоритет</th>
+                    <th>Департамент</th>
+                 </tr>
+            </thead>
+            <tbody>
+                    {% for task in user_tasks %}
+                    <tr>
+                        <td>
+                            <form method="POST" action="{% url 'app_tasks:taskdetails' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="task_id" value="{{task.id}}" />
+                                <button type="submit" style="border:none; background:none; padding:0; margin:0; cursor:pointer; color:blue; text-decoration:underline;">
+                                  {{task.id}}
+                                </button>
+                              </form>
+                        </td>
+                        <td>
+                            {{ task.theme }}
+                        </td>
+                        <td>
+                            {{ task.author_id }}
+                        </td>
+                        <td>
+                            {{ task.completion_Date_plan }}
+                        </td>
+                        <td>
+                            {{ task.status_id }}
+                        </td>
+                        <td>
+                            {{ task.created_at }}
+                        </td>
+                        <td>
+                            {{ task.priority_id }}
+                        </td>
+                        <td>
+                            {{ task.department_id }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+	        </tbody>
+        </table>
+    </div>
+
+{% endblock %}
