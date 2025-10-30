@@ -1,6 +1,7 @@
 {% extends '_base.html' %}
 {% load static %}
 {% block content %}
+<script src="{% static 'js/task.js' %}"></script>
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 <div class="col-6 offset-3">
@@ -8,16 +9,25 @@
         {% csrf_token %}
         {% for f in form %}
         <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
-        <div class="form-error">{{ f.errors }}</div>
+        <div class="
+
+
+">{{ f.errors }}</div>
         {% endfor %}
+         {% if not form.task_id.value %}
+        <button type="submit" class="btn btn-secondary">Создать</button>
+        {% else %}
         <button type="submit" class="btn btn-secondary">Сохранить</button>
+        {% endif %}
     </form>
 </div>
-
+<pre>{{ list_of_dicts_priority }}</pre>
+<pre>{{ dicts_type_task }}</pre>
 <script>
   window.djangoData = {
-    listOfDictsPriority: {{ list_of_dicts_priority|safe }},
-    listOfDictsTypeTask: {{ list_of_dicts_type_task|safe }},
+    DictsPriority: {{ list_of_dicts_priority|safe }},
+    DictsTypeTask: {{ dicts_type_task|safe }},
   };
 </script>
+
 {% endblock content %}

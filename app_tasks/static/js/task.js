@@ -1,27 +1,20 @@
 if (window.djangoData) {
-    const priorityData = window.djangoData.listOfDictsPriority;
-    const typeTaskData = window.djangoData.listOfDictsTypeTask;
+    const typeTaskData = window.djangoData.DictsTypeTask;
 
+    document.addEventListener('DOMContentLoaded', () => {
+        const selectElement = document.getElementById('type_task_id');
+        const resultField = document.getElementById('department_id');
 
-document.addEventListener('DOMContentLoaded', function() {
-  const field1 = document.querySelector('type_task_id');
-  const field2 = document.querySelector('department_id');
-
-  if (field1 && field2) {
-    field1.addEventListener('change', function() {
-      const value = field1.value;
-      for (let i = 0; i < priorityData.length; i++) {
-        const item = priorityData[i];
-        if const
-
-}
-      document.
-      for
-      if (value === 'X') {
-        field2.value = 'Новое значение';
-      }
-      }
+        selectElement.addEventListener('change', () => {
+            const selectedKey = selectElement.value;
+            if (selectedKey && typeTaskData.hasOwnProperty(selectedKey)) {
+                const dict_type = typeTaskData[selectedKey];
+                resultField.value = dict_type['department_id_id'];
+            } else {
+                resultField.value = '';
+            }
+        });
     });
-  }
-});
-
+} else {
+    console.warn('window.djangoData не определен');
+}

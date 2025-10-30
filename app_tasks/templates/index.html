@@ -11,6 +11,7 @@
                     <th>Номер заявки</th>
                     <th>Тема</th>
                     <th>Автор</th>
+                    <th>Исполнитель</th>
                     <th>Срок</th>
                     <th>Статус</th>
                     <th>Дата создания заявки</th>
@@ -24,7 +25,7 @@
                         <td>
                             <form method="POST" action="{% url 'app_tasks:taskdetails' %}">
                                 {% csrf_token %}
-                                <input type="hidden" name="task_id" value="{{task.id}}" />
+                                <input type="hidden" name="task_id_edit" value="{{task.id}}" />
                                 <button type="submit" style="border:none; background:none; padding:0; margin:0; cursor:pointer; color:blue; text-decoration:underline;">
                                   {{task.id}}
                                 </button>
@@ -35,6 +36,9 @@
                         </td>
                         <td>
                             {{ task.author_id }}
+                        </td>
+                        <td>
+                            {{ task.user_id }}
                         </td>
                         <td>
                             {{ task.completion_Date_plan }}
