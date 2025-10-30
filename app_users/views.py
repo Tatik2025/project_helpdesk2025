@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+
+import app_tasks.views
 from .forms import LoginForm, RegisterUserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -97,10 +99,13 @@ def LoginView(request):
             username=form.cleaned_data['username']
             password=form.cleaned_data['password']
             user=authenticate(request,username=username,password=password)
+
             if user is not None:
+
                 login(request,user)
-                messages.success(request, "Вы успешно вошли!")
+
                 return redirect('app_tasks:index')
+
             else:
                 messages.error(request,"Вход не выполнен!")
 
@@ -112,11 +117,11 @@ def LoginView(request):
 
     return render(request, 'login.html',{'form':form})
 
-#LogoutView
+#Выход из аккаунта пользователя
 def LogoutView(request):
     logout(request)
     messages.success(request, "Выход осуществлен!")
-    return redirect('app_tasks:index')
+    return redirect('app_users:login')
 
 
 def RegisterView(request):

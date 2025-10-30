@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 app_name = "app_tasks"
 
 urlpatterns = [
-    path('', views.index, name="index"),
+    path('', views.basepage, name="index"),
     path('index/', views.index, name="index"),
     path('taskdetails/', views.TaskDetail, name="taskdetails"),
     path('users', include('app_users.urls')),
@@ -14,4 +14,3 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
