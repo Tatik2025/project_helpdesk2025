@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<div class="form-main">
 {% csrf_token %}
     <div class="user-table-container">
         <table class="table_users">
@@ -43,5 +44,5 @@
 	        </tbody>
         </table>
     </div>
-
+</div>
 {% endblock %}

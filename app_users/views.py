@@ -120,7 +120,7 @@ def LoginView(request):
 #Выход из аккаунта пользователя
 def LogoutView(request):
     logout(request)
-    messages.success(request, "Выход осуществлен!")
+    # messages.success(request, "Выход осуществлен!")
     return redirect('app_users:login')
 
 
@@ -131,7 +131,7 @@ def RegisterView(request):
             user = Register_form.save(commit=False)
             user.set_password(Register_form.cleaned_data['password1'])
             user.save()
-            messages.success(request, "Вы успешно зарегистрировались!")
+            # messages.success(request, "Вы успешно зарегистрировались!")
             return redirect('app_users:login')
         else:
             messages.error(request, "Данные для регистрации некорректные!")

@@ -42,7 +42,7 @@ def get_list_tasks(user):
 
     return context2
 
-#Сделала для корректного отображения адреса http://127.0.0.1:8000/
+#для корректного отображения адреса http://127.0.0.1:8000/
 def basepage(request):
     return redirect('app_tasks:index')
 
@@ -90,13 +90,17 @@ def TaskDetail(request):
                         if form.cleaned_data['status_id'] != task.status_id:
                             task.status_id = form.cleaned_data['status_id']
                             list_update_fields.append('status_id')
+                        if form.cleaned_data['user_id'] != task.user_id:
+                            task.user_id = form.cleaned_data['user_id']
+                            list_update_fields.append('user_id')
 
-                        # if form.cleaned_data['department_id'] != task.department_id:
-                        # task.department_id = form.cleaned_data['department_id']
-                        # list_update_fields.append('department_id')
+                        if form.cleaned_data['completion_Date_plan'] != task.completion_Date_plan:
+                            task.completion_Date_plan = form.cleaned_data['completion_Date_plan']
+                            list_update_fields.append('completion_Date_plan')
 
                         if list_update_fields:
                             task.save(update_fields=list_update_fields)
+                        return redirect('app_tasks:index')
                     else:
                         messages.error(request, "Заявка удалена!")
                 else:

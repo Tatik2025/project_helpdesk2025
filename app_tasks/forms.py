@@ -1,24 +1,14 @@
 from django import forms
 from app_tasks.models import Priority, Task, Department, Status,Type_task
-from django.forms import ModelForm
 from django.contrib.auth import get_user_model
-from datetime import datetime
+
 
 
 class TaskDetailForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
-        #user = kwargs.pop('user', None)
+
         super(TaskDetailForm, self).__init__(*args, **kwargs)
-
-        # if user.access_level ==0:
-        #     self.fields['description'].initial = 'Ghbdtn0'
-        # if user.access_level ==1:
-        #     self.fields['description'].initial = 'Ghbdtn1'
-        # if user.access_level ==2:
-        #     self.fields['description'].initial = 'Ghbdtn2'
-        #self.fields['author_id'].widget.attrs['readonly'] = True
-
 
     class_user = get_user_model()
 
@@ -70,16 +60,8 @@ class TaskDetailForm(forms.Form):
 class TaskCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
-        # user = kwargs.pop('user', None)
         super(TaskCreateForm, self).__init__(*args, **kwargs)
 
-        # if user.access_level ==0:
-        #     self.fields['description'].initial = 'Ghbdtn0'
-        # if user.access_level ==1:
-        #     self.fields['description'].initial = 'Ghbdtn1'
-        # if user.access_level ==2:
-        #     self.fields['description'].initial = 'Ghbdtn2'
-        # self.fields['author_id'].widget.attrs['readonly'] = True
 
     class_user = get_user_model()
 
